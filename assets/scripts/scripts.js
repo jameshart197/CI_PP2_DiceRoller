@@ -1,5 +1,6 @@
 const diceContainers = document.getElementsByClassName('dice-container');
 const getRollButtonElement = document.getElementById('roll-button');
+const allDiceInputElements = document.querySelectorAll('.dice-container input');
 
 for (container of diceContainers) {
     container.addEventListener("mouseup", (e) => {
@@ -33,3 +34,9 @@ for (container of diceContainers) {
 
     })
 }
+
+getRollButtonElement.addEventListener('click', () => {
+    const faces = input.getAttribute('data-faces');
+    let result = Math.floor(Math.random() * +faces) + 1;
+    console.log(result);
+})
