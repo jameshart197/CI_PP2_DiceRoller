@@ -30,8 +30,6 @@ for (container of diceContainers) {
             default:
                 break;
         }
-        elements.badge.innerText = elements.source.value;
-
     })
 }
 
