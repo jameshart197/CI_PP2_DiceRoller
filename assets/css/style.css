@@ -1,0 +1,23 @@
+.dice-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: 1.2em;
+    left: 5em;
+}
+
+.dice-container img {
+max-width: 120px;
+max-height: 120px;
+}
