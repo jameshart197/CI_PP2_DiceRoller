@@ -60,9 +60,9 @@ getRollButtonElement.addEventListener('click', () => {
         }
         //display results//
         diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`])
-        thisDiv.innerText += diceResults[`d${faces}Messages`].rollingMessage;
+        // thisDiv.innerText += diceResults[`d${faces}Messages`].rollingMessage;
         //animation function to be inserted here
-        thisDiv.innerText += diceResults[`d${faces}Messages`].resultsMessage;
+        // thisDiv.innerText += diceResults[`d${faces}Messages`].resultsMessage;
         //reset count//
         updateBadge(input, 0)
     }

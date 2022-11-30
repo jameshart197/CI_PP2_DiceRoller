@@ -35,11 +35,15 @@ header img {
     justify-content: center;
     align-items: center;
     position: relative;
-    bottom: 1.2em;
+    bottom: 0.6em;
     left: 5em;
 }
 
 .dice-container img {
 max-width: 120px;
 max-height: 120px;
+}
+
+.hidden {
+    display: none;
 }
