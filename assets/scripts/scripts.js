@@ -2,6 +2,12 @@ const diceContainers = document.getElementsByClassName('dice-container');
 const getRollButtonElement = document.getElementById('roll-button');
 const allDiceInputElements = document.querySelectorAll('.dice-container input');
 
+function updateBadge (input, value) {
+    const badge = input.previousElementSibling;
+    input.value = value;
+    badge.innerText = value;
+}
+
 for (container of diceContainers) {
     container.addEventListener("mouseup", (e) => {
         e.preventDefault;
@@ -19,11 +25,11 @@ for (container of diceContainers) {
         }
         switch (e.button) {
             case 0:
-                elements.source.value++;
+                updateBadge(elements.source, +elements.source.value + 1);
                 break;
             case 2:
                 if(elements.source.value !=0) {
-                    elements.source.value--;
+                    updateBadge(elements.source, +elements.source.value - 1);
                 }
                 break;
 
@@ -55,7 +61,7 @@ getRollButtonElement.addEventListener('click', () => {
         //display results//
         diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`])
         //reset count//
-        input.value = 0;
+        updateBadge(input, 0)
     }
     console.log(diceResults)
 })
