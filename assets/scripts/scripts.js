@@ -36,7 +36,19 @@ for (container of diceContainers) {
 }
 
 getRollButtonElement.addEventListener('click', () => {
-    const faces = input.getAttribute('data-faces');
-    let result = Math.floor(Math.random() * +faces) + 1;
-    console.log(result);
+    let totalDice = {
+        total: 0
+    };
+    for(input of allDiceInputElements) {
+        //find number of faces on dice//
+        const faces = input.getAttribute('data-faces');
+        //apply number of dice chosen
+        totalDice[faces] = +input.value;
+        //create array of results for each dice rolled and roll dice//
+        totalDice['rolled'+faces] = [];
+        for(let i=0; i < totalDice[faces]; i++) {
+            totalDice['rolled'+faces].push(Math.floor(Math.random() * +faces) + 1);
+        }
+        //display results//
+    }
 })
