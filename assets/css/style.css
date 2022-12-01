@@ -24,13 +24,16 @@ main {
     grid-template-columns: 1fr 4fr 1fr;
 }
 
+main > div {
+    border: thin black solid;
+}
+
 .left-container {
     padding: 1em 0;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    border: thin black solid;
     gap: 1em;
 }
 
@@ -44,7 +47,6 @@ main {
 .central-container {
     padding: .8em;
     flex-direction: column;
-    background-color: rgb(196, 196, 196);
     display: flex;
     font-size: 150%;
 }

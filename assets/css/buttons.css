@@ -49,9 +49,10 @@ input[type="checkbox"].toggle:checked + label::before {
 }
 
 .criticals {
-    border: 2px solid black;
+    border: 2px solid #343434;
     padding: .3em;
     border-radius: 1em;
+    background-color: #c9c5c5;
 }
 
 /** This section is for the Roll Button **/
@@ -75,7 +76,7 @@ input[type="checkbox"].toggle:checked + label::before {
 }
 
 .central-container button:hover {
-    border-color: rgba(255,255,255,1);
+    border-color: rgb(0, 0, 0);
 }
 
 #clear {
@@ -95,4 +96,10 @@ input[type="checkbox"].toggle:checked + label::before {
     min-width: 120px;
     font-size: 100%;
     font-weight: bold;
+}
+
+#clear:hover {
+    border: 4px solid #880101;
+    background-color: #FFFFFF;
+    color: #880101;
 }
