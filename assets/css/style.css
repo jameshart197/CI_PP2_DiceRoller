@@ -25,32 +25,39 @@ main {
 }
 
 .left-container {
-    padding-top: 1em;
+    padding: 1em 0;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     border: thin black solid;
+    gap: 1em;
 }
 
 .right-container {
     background-color: gray;
     padding: 1em;
+    position: relative;
 }
 
 .central-container {
-    padding: 3em;
+    padding: .8em;
+    flex-direction: column;
     background-color: rgb(196, 196, 196);
     display: flex;
-    justify-content: space-evenly;
     font-size: 150%;
-    align-items: flex-start;
 }
 
 #button-section {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#button-container {
+    display: flex;
+    justify-content: center;
     width: 100%;
 }
 
@@ -76,7 +83,7 @@ main {
     align-items: center;
     position: relative;
     bottom: 0.6em;
-    left: em;
+    left: -1em;
 }
 
 .dice-container img {
@@ -90,6 +97,17 @@ main {
     font-weight: bold;
     text-align: center;
     line-height: 110%;
+}
+
+.absolute-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.center-children {
+    text-align: center;
 }
 
 .hidden {

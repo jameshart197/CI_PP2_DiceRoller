@@ -1,6 +1,8 @@
 const diceContainers = document.getElementsByClassName('dice-container');
 const getRollButtonElement = document.getElementById('roll-button');
 const allDiceInputElements = document.querySelectorAll('.dice-container input');
+const resultsBox = document.getElementById('results-box');
+const clearButton = document.getElementById('clear')
 
 function updateBadge (input, value) {
     const badge = input.previousElementSibling;
@@ -20,7 +22,7 @@ for (container of diceContainers) {
             } else if (child.tagName === 'INPUT') {
                 elements.source = child
             } else {
-                break
+                continue
             }
         }
         switch (e.button) {
@@ -44,6 +46,7 @@ for (container of diceContainers) {
 getRollButtonElement.addEventListener('click', () => {
     let diceResults = {};
     diceResults.total= 0;
+    
         
     for(input of allDiceInputElements) {
         if (+input.value === 0) {
@@ -60,13 +63,16 @@ getRollButtonElement.addEventListener('click', () => {
         }
         //display results//
         diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`])
-        let resultsBox = document.getElementById('results-box');
         resultsBox.innerText += diceResults[`d${faces}Messages`].rollingMessage;
-        //animation function to be inserted here
+        //delay
         resultsBox.innerText += diceResults[`d${faces}Messages`].resultsMessage;
         //reset count//
         updateBadge(input, 0)
     }
+    let multipleDice = Object.keys(diceResults).length > 3;
+    if (multipleDice) {
+    resultsBox.innerText += `\n Combined total = ${diceResults.total}`
+    }   
     console.log(diceResults)
 })
 
@@ -78,4 +84,7 @@ function buildRolledMessage(diceType, results) {
     return rolledMessages;
 }
 
+clearButton.addEventListener('click', () => {
+    resultsBox.innerText = '';
+})
 

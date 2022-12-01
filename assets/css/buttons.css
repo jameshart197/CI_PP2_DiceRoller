@@ -48,10 +48,6 @@ input[type="checkbox"].toggle:checked + label::before {
     background-color: rgb(14, 76, 247);
 }
 
-input[type="checkbox"].toggle:checked + label {
-    color: rgb(4, 0, 255);
-}
-
 .criticals {
     border: 2px solid black;
     padding: .3em;
@@ -80,4 +76,8 @@ input[type="checkbox"].toggle:checked + label {
 
 .central-container button:hover {
     border-color: rgba(255,255,255,1);
+}
+
+#clear {
+    margin-bottom: 1em;
 }
