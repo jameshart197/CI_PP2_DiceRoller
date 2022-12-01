@@ -36,7 +36,8 @@ main {
 
 .right-container {
     background-color: gray;
-    padding: 1em;
+    padding-top: 1em;
+    padding-bottom: 4em;
     position: relative;
 }
 
@@ -97,6 +98,10 @@ main {
     font-weight: bold;
     text-align: center;
     line-height: 110%;
+    max-height: 65vh;
+    overflow: scroll;
+    overflow-x: hidden;
+
 }
 
 .absolute-bottom {
@@ -104,6 +109,7 @@ main {
     bottom: 0;
     left: 0;
     right: 0;
+    margin-bottom: 1em;
 }
 
 .center-children {

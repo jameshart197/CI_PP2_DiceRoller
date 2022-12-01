@@ -83,7 +83,7 @@ getRollButtonElement.addEventListener('click', () => {
     }
     let multipleDice = Object.keys(diceResults).length > 3;
     if (multipleDice) {
-    resultsBox.innerText += `\n Combined total = ${diceResults.total}`
+    resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
     }   
     console.log(diceResults)
 })
