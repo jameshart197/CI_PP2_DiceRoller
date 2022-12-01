@@ -65,13 +65,19 @@ getRollButtonElement.addEventListener('click', () => {
             const result = Math.floor(Math.random() * faces) + 1;
             diceResults[`d${faces}Results`].push(result);
             diceResults.total += result
-            /* if dangerous crit, push ${faces} into array */
+            if (isCrit('dangerous-crit')) {
+                diceResults.total += faces;
+            }
         }
         //display results//
         diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`])
         resultsBox.innerText += diceResults[`d${faces}Messages`].rollingMessage;
         //delay
-        resultsBox.innerText += diceResults[`d${faces}Messages`].resultsMessage;
+        resultsBox.innerText += diceResults[`d${faces}Messages`].rolledResult;
+        if (isCrit('dangerous-crit')) {
+            resultsBox.innerText += diceResults[`d${faces}Messages`].dangerousCrit;
+        }
+        resultsBox.innerText += diceResults[`d${faces}Messages`].resultAdded;
         //reset count//
         updateBadge(input, 0)
     }
@@ -84,9 +90,14 @@ getRollButtonElement.addEventListener('click', () => {
 
 function buildRolledMessage(diceType, results) {
     const rolledMessages = {};
+    let subTotal = results.reduce((runningTotal, a) => runningTotal + a, 0);
+    if (isCrit('dangerous-crit')) {
+        subTotal += results.map((a) => diceType).reduce((runningTotal, a) => runningTotal + a, 0);
+    }
     rolledMessages.rollingMessage = `\n Rolling ${results.length}d${diceType}... \n`
-    rolledMessages.resultsMessage = `\n Rolled (${results.join(' + ')}) \n Total = ${results.reduce((runningTotal, a) => runningTotal + a, 0)} \n`
-    rolledMessages.resultsCombined = `Combined total = `
+    rolledMessages.rolledResult = `\n Rolled (${results.join(' + ')})`
+    rolledMessages.resultAdded = `\n Total = ${subTotal} \n`
+    rolledMessages.dangerousCrit = `\n Dangerous Crits (${results.map((a) => diceType).join(' + ')})`
     return rolledMessages;
 }
 
