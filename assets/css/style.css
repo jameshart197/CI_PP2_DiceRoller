@@ -56,8 +56,13 @@ main {
 
 .dice-container {
     display: flex;
-    flex-direction: column;
     padding: .5em;
+    align-items: center;
+    padding: 0 .5em;
+}
+
+.dice-container h2 {
+    padding: 0 .5em;
 }
 
 .badge {
@@ -71,7 +76,7 @@ main {
     align-items: center;
     position: relative;
     bottom: 0.6em;
-    left: 5em;
+    left: em;
 }
 
 .dice-container img {

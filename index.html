@@ -19,6 +19,7 @@
     <main>
         <div class="left-container">
             <div class="dice-container" oncontextmenu="event.preventDefault();">
+                <h2>D20</h2>
                 <img src="assets/images/d20.png" alt="D20 Image">
                 <div class="badge">0</div>
                 <input type="number" class="hidden" value="0" data-faces="20">
@@ -53,18 +54,16 @@
         <div class="central-container">
             <div id="button-section">
                 <div class="criticals">
-                    <input type="checkbox" id="check" class="toggle">
-                    <label for="check">Standard Critical Hit</label>
-
+                    <input type="checkbox" id="standard-crit" class="toggle">
+                    <label for="standard-crit">Standard Critical Hit</label>
                 </div>
                 <div id="button-container">
                     <button id="roll-button">Roll!</button>
                 </div>
                 <div class="criticals">
-                    <label>
-                        <input type="checkbox">
-                        <span>Standard Critical Hit</span>
-                    </label>
+                    <input type="checkbox" id="dangerous-crit" class="toggle">
+                    <label for="dangerous-crit">Dangerous Critical Hit</label>
+                </div>
                 </div>
             </div>
         </div>
