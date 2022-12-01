@@ -60,9 +60,10 @@ getRollButtonElement.addEventListener('click', () => {
         }
         //display results//
         diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`])
-        // thisDiv.innerText += diceResults[`d${faces}Messages`].rollingMessage;
+        let resultsBox = document.getElementById('results-box');
+        resultsBox.innerText += diceResults[`d${faces}Messages`].rollingMessage;
         //animation function to be inserted here
-        // thisDiv.innerText += diceResults[`d${faces}Messages`].resultsMessage;
+        resultsBox.innerText += diceResults[`d${faces}Messages`].resultsMessage;
         //reset count//
         updateBadge(input, 0)
     }
@@ -71,9 +72,10 @@ getRollButtonElement.addEventListener('click', () => {
 
 function buildRolledMessage(diceType, results) {
     const rolledMessages = {};
-    rolledMessages.rollingMessage = `Rolling ${results.length}d${diceType}`
-    rolledMessages.resultsMessage = `Rolled (${results.join(' + ')}) total= ${results.reduce((runningTotal, a) => runningTotal + a, 0)}`
+    rolledMessages.rollingMessage = `\n Rolling ${results.length}d${diceType}... \n`
+    rolledMessages.resultsMessage = `\n Rolled (${results.join(' + ')}) \n Total = ${results.reduce((runningTotal, a) => runningTotal + a, 0)} \n`
+    rolledMessages.resultsCombined = `Combined total = `
     return rolledMessages;
 }
 
-thisDiv.innerText += rolledMessages.rollingMessage;
+

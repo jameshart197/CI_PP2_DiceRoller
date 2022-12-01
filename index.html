@@ -1,52 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dice Roller</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/buttons.css">
 </head>
+
 <body>
     <header>
         <img src="assets/images/no-text-logo.png" alt="Duck Pond D&D Logo">
         <h1>Duck Pond Dice Roller</h1>
     </header>
-    <div class="dice-container" oncontextmenu="event.preventDefault();">
-        <img src="assets/images/d20.png" alt="D20 Image">
-        <div class="badge">0</div>
-        <input type="number" class="hidden" value="0" data-faces="20">
-    </div>
-    <div class="dice-container" oncontextmenu="event.preventDefault();">
-        <img src="assets/images/d12.png" alt="D12 Image">
-        <div class="badge">0</div>
-        <input type="number" class="hidden" value="0" data-faces="12">
-    </div>
-    <div class="dice-container" oncontextmenu="event.preventDefault();">
-        <img src="assets/images/d10.png" alt="D10 Image">
-        <div class="badge">0</div>
-        <input type="number" class="hidden" value="0" data-faces="10">
-    </div>
-    <div class="dice-container" oncontextmenu="event.preventDefault();">
-        <img src="assets/images/d8.png" alt="D8 Image">
-        <div class="badge">0</div>
-        <input type="number" class="hidden" value="0" data-faces="8">
-    </div>
-    <div class="dice-container" oncontextmenu="event.preventDefault();">
-        <img src="assets/images/d6.png" alt="D6 Image">
-        <div class="badge">0</div>
-        <input type="number" class="hidden" value="0" data-faces="6">
-    </div>
-    <div class="dice-container" oncontextmenu="event.preventDefault();">
-        <img src="assets/images/d4.png" alt="D4 Image">
-        <div class="badge">0</div>
-        <input type="number" class="hidden" value="0" data-faces="4">
-    </div>
 
-    <div>
-        <button id="roll-button">Roll!</button>
-    </div>
+    <main>
+        <div class="left-container">
+            <div class="dice-container" oncontextmenu="event.preventDefault();">
+                <img src="assets/images/d20.png" alt="D20 Image">
+                <div class="badge">0</div>
+                <input type="number" class="hidden" value="0" data-faces="20">
+            </div>
+            <div class="dice-container" oncontextmenu="event.preventDefault();">
+                <img src="assets/images/d12.png" alt="D12 Image">
+                <div class="badge">0</div>
+                <input type="number" class="hidden" value="0" data-faces="12">
+            </div>
+            <div class="dice-container" oncontextmenu="event.preventDefault();">
+                <img src="assets/images/d10.png" alt="D10 Image">
+                <div class="badge">0</div>
+                <input type="number" class="hidden" value="0" data-faces="10">
+            </div>
+            <div class="dice-container" oncontextmenu="event.preventDefault();">
+                <img src="assets/images/d8.png" alt="D8 Image">
+                <div class="badge">0</div>
+                <input type="number" class="hidden" value="0" data-faces="8">
+            </div>
+            <div class="dice-container" oncontextmenu="event.preventDefault();">
+                <img src="assets/images/d6.png" alt="D6 Image">
+                <div class="badge">0</div>
+                <input type="number" class="hidden" value="0" data-faces="6">
+            </div>
+            <div class="dice-container" oncontextmenu="event.preventDefault();">
+                <img src="assets/images/d4.png" alt="D4 Image">
+                <div class="badge">0</div>
+                <input type="number" class="hidden" value="0" data-faces="4">
+            </div>
+        </div>
 
+        <div class="central-container">
+            <div id="button-section">
+                <div class="criticals">
+                    <input type="checkbox" id="check" class="toggle">
+                    <label for="check">Standard Critical Hit</label>
+
+                </div>
+                <div id="button-container">
+                    <button id="roll-button">Roll!</button>
+                </div>
+                <div class="criticals">
+                    <label>
+                        <input type="checkbox">
+                        <span>Standard Critical Hit</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="right-container">
+            <div id="results-box">
+
+            </div>
+        </div>
+    </main>
     <script src="assets/scripts/scripts.js"></script>
 </body>
+
 </html>
