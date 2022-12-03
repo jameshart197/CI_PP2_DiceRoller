@@ -4,6 +4,22 @@ const allDiceInputElements = document.querySelectorAll('.dice-container input');
 const resultsBox = document.getElementById('results-box');
 const clearButton = document.getElementById('clear')
 const toggleButtons = [document.getElementsByClassName('toggle')[0],document.getElementsByClassName('toggle')[1]];
+const minusModifier = document.getElementById('minus');
+const plusModifier = document.getElementById('plus')
+const modifier = document.getElementById('modifiers')
+
+minusModifier.addEventListener ('click', () => {
+    updateModifier(modifier, +modifier.value - 1);
+})
+
+plusModifier.addEventListener ('click', () => {
+    updateModifier(modifier, +modifier.value + 1);
+})
+
+function updateModifier (input, value) {
+    modifier.value = value;
+    modifier.innerText = value;
+}
 
 function updateBadge (input, value) {
     const badge = input.previousElementSibling;
@@ -65,6 +81,7 @@ getRollButtonElement.addEventListener('click', () => {
             const result = Math.floor(Math.random() * faces) + 1;
             diceResults[`d${faces}Results`].push(result);
             diceResults.total += result
+            diceResults.total + +modifier.value
             if (isCrit('dangerous-crit')) {
                 diceResults.total += faces;
             }
