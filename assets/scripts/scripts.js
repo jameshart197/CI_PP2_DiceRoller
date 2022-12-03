@@ -3,25 +3,25 @@ const getRollButtonElement = document.getElementById('roll-button');
 const allDiceInputElements = document.querySelectorAll('.dice-container input');
 const resultsBox = document.getElementById('results-box');
 const clearButton = document.getElementById('clear')
-const toggleButtons = [document.getElementsByClassName('toggle')[0],document.getElementsByClassName('toggle')[1]];
+const toggleButtons = [document.getElementsByClassName('toggle')[0], document.getElementsByClassName('toggle')[1]];
 const minusModifier = document.getElementById('minus');
 const plusModifier = document.getElementById('plus')
 const modifier = document.getElementById('modifiers')
 
-minusModifier.addEventListener ('click', () => {
+minusModifier.addEventListener('click', () => {
     updateModifier(modifier, +modifier.value - 1);
 })
 
-plusModifier.addEventListener ('click', () => {
+plusModifier.addEventListener('click', () => {
     updateModifier(modifier, +modifier.value + 1);
 })
 
-function updateModifier (input, value) {
+function updateModifier(input, value) {
     modifier.value = value;
     modifier.innerText = value;
 }
 
-function updateBadge (input, value) {
+function updateBadge(input, value) {
     const badge = input.previousElementSibling;
     input.value = value;
     badge.innerText = value;
@@ -47,7 +47,7 @@ for (container of diceContainers) {
                 updateBadge(elements.source, +elements.source.value + 1);
                 break;
             case 2:
-                if(elements.source.value !=0) {
+                if (elements.source.value != 0) {
                     updateBadge(elements.source, +elements.source.value - 1);
                 }
                 break;
@@ -62,10 +62,10 @@ for (container of diceContainers) {
 
 getRollButtonElement.addEventListener('click', () => {
     let diceResults = {};
-    diceResults.total= 0;
-    
-        
-    for(input of allDiceInputElements) {
+    diceResults.total = 0;
+
+
+    for (input of allDiceInputElements) {
         if (+input.value === 0) {
             continue;
         }
@@ -77,11 +77,10 @@ getRollButtonElement.addEventListener('click', () => {
         }
         //create array of results for each dice rolled and roll dice//
         diceResults[`d${faces}Results`] = [];
-        for(let i=0; i < diceQuantity; i++) {
+        for (let i = 0; i < diceQuantity; i++) {
             const result = Math.floor(Math.random() * faces) + 1;
             diceResults[`d${faces}Results`].push(result);
             diceResults.total += result
-            diceResults.total + +modifier.value
             if (isCrit('dangerous-crit')) {
                 diceResults.total += faces;
             }
@@ -99,9 +98,13 @@ getRollButtonElement.addEventListener('click', () => {
         updateBadge(input, 0)
     }
     let multipleDice = Object.keys(diceResults).length > 3;
-    if (multipleDice) {
-    resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
-    }   
+    if (multipleDice && modifier.value != 0) {
+        resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (+ ${+modifier.value}) = ${diceResults.total + +modifier.value} \n`
+    } else if (modifier.value != 0) {
+        resultsBox.innerText += `\n (+ ${+modifier.value}) = ${diceResults.total + +modifier.value} \n`
+    } else if (multipleDice) {
+        resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
+    }
     console.log(diceResults)
 })
 
@@ -123,16 +126,16 @@ clearButton.addEventListener('click', () => {
 })
 
 for (button of toggleButtons) {
-button.addEventListener('change', (e) => {
-    if (e.currentTarget.checked) {
-    //alert('change detected')
-    toggleButtons.forEach(tb => {
-        if (tb.id != e.currentTarget.id) {
-            tb.checked = false;
+    button.addEventListener('change', (e) => {
+        if (e.currentTarget.checked) {
+            //alert('change detected')
+            toggleButtons.forEach(tb => {
+                if (tb.id != e.currentTarget.id) {
+                    tb.checked = false;
+                }
+            })
         }
     })
-    }
-})
 }
 
 function isCrit(id) {
