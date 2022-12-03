@@ -99,9 +99,11 @@ getRollButtonElement.addEventListener('click', () => {
     }
     let multipleDice = Object.keys(diceResults).length > 3;
     if (multipleDice && modifier.value != 0) {
-        resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (+ ${+modifier.value}) = ${diceResults.total + +modifier.value} \n`
+        const addPlus = modifier.value > 0 ? '+' : '';
+        resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (${addPlus}${+modifier.value}) = ${diceResults.total + +modifier.value} \n`
     } else if (modifier.value != 0) {
-        resultsBox.innerText += `\n (+ ${+modifier.value}) = ${diceResults.total + +modifier.value} \n`
+        const addPlus = modifier.value > 0 ? '+' : '';
+        resultsBox.innerText += `\n(${addPlus}${+modifier.value}) = ${diceResults.total + +modifier.value} \n`
     } else if (multipleDice) {
         resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
     }
