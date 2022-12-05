@@ -8,13 +8,14 @@
     <title>Dice Roller</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/buttons.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
 </head>
 
 <body>
     <header>
         <img class="logo" src="assets/images/no-text-logo.png" alt="Duck Pond D&D Logo">
         <h1>Duck Pond Dice Roller</h1>
-        <!-- <a href="dice-animations.html">test-page</a> -->
+        <a href="dice-animations.html">test-page</a>
     </header>
 
     <main>
@@ -76,6 +77,34 @@
             <div id="button-container">
                 <button id="roll-button">Roll!</button>
             </div>
+            <div id="animations-box">
+                <div id="blank-dice" class="hidden">
+                    <div class="dice-box" id="d20-container">
+                        <img src="assets/images/d20-blank.png" alt="Blank D20">
+                        <p>20</p>
+                    </div>
+                    <div class="dice-box" id="d12-container">
+                        <img src="assets/images/d12-blank.png" alt="Blank D12">
+                        <p>12</p>
+                    </div>
+                    <div class="dice-box" id="d10-container">
+                        <img src="assets/images/d10-blank.png" alt="Blank D10">
+                        <p>10</p>
+                    </div>
+                    <div class="dice-box" id="d8-container">
+                        <img src="assets/images/d8-blank.png" alt="Blank D8">
+                        <p>8</p>
+                    </div>
+                    <div class="dice-box" id="d6-container">
+                        <img src="assets/images/d6-blank.png" alt="Blank D6">
+                        <p>6</p>
+                    </div>
+                    <div class="dice-box" id="d4-container">
+                        <img src="assets/images/d4-blank.png" alt="Blank D4">
+                        <p>4</p>
+                    </div>      
+                </div>
+            </div>
         </div>
         </div>
         <div class="right-container">
@@ -96,6 +125,7 @@
         </footer>
     </main>
     <script src="https://kit.fontawesome.com/86633e9820.js" crossorigin="anonymous"></script>
+    <script src="assets/scripts/animations.js"></script>
     <script src="assets/scripts/scripts.js"></script>
 </body>
 

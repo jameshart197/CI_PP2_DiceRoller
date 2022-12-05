@@ -1,24 +1,23 @@
-body {
-    padding: 0;
-    margin: 0;
-    margin-left: 1em;
+#animations-box {
+    display: flex;
+    gap: 1em;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-div {
+#animations-box div {
     width: 120px;
     height: 120px;
 }
 
-img {
+#animations-box img {
     width: 120px;
     height: 120px;
 }
 
-.dice-box {
-    position: relative;
-}
-
-p {
+#animations-box p {
     position: absolute;
     top: 50%;  
     left: 50%; 
@@ -27,3 +26,8 @@ p {
     font-size: 150%;
     font-weight: bold;
 }
+
+.dice-box {
+    position: relative;
+}
+
