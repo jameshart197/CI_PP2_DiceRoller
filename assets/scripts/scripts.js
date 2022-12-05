@@ -88,7 +88,7 @@ getRollButtonElement.addEventListener('click', () => {
         //display results//
         diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`])
         resultsBox.innerText += diceResults[`d${faces}Messages`].rollingMessage;
-        //delay
+        //animation code here
         resultsBox.innerText += diceResults[`d${faces}Messages`].rolledResult;
         if (isCrit('dangerous-crit')) {
             resultsBox.innerText += diceResults[`d${faces}Messages`].dangerousCrit;

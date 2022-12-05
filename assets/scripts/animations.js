@@ -8,10 +8,10 @@ function createDie(faces, result) {
     diceBox.appendChild(rolledNumber);
     animationsBox.appendChild(diceBox);
     const numbers = getRandomNumbersFromFaces(faces);
-    let animationVariations = 5
+    let animationVariations = 8
     for(let i = 0; i < animationVariations; i++) {
-        setTimeout(() => { rolledNumber.innerText = numbers[i]}, 500 * i);
-        setTimeout(() => { rolledNumber.innerText = result}, 2500);
+        setTimeout(() => { rolledNumber.innerText = numbers[i]}, 150 * i);
+        setTimeout(() => { rolledNumber.innerText = result}, 1200);
     }
 }
 
