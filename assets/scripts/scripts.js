@@ -7,6 +7,9 @@ const toggleButtons = [document.getElementsByClassName('toggle')[0], document.ge
 const minusModifier = document.getElementById('minus');
 const plusModifier = document.getElementById('plus')
 const modifier = document.getElementById('modifiers')
+const animationsBox = document.getElementById('animations-box');
+const animationVariations = 8
+const refreshDelay = 250
 
 minusModifier.addEventListener('click', () => {
     updateModifier(modifier, +modifier.value - 1);
@@ -61,6 +64,7 @@ for (container of diceContainers) {
 //We rolled 2 d20 and 1d12 and got 5, 4, 10. 
 
 getRollButtonElement.addEventListener('click', () => {
+    animationsBox.innerHTML = '';
     let diceResults = {};
     diceResults.total = 0;
 
@@ -80,6 +84,9 @@ getRollButtonElement.addEventListener('click', () => {
         for (let i = 0; i < diceQuantity; i++) {
             const result = Math.floor(Math.random() * faces) + 1;
             diceResults[`d${faces}Results`].push(result);
+            setTimeout(() => {
+                createDie(faces, result)
+            }, refreshDelay)
             diceResults.total += result
             if (isCrit('dangerous-crit')) {
                 diceResults.total += faces;
@@ -88,26 +95,66 @@ getRollButtonElement.addEventListener('click', () => {
         //display results//
         diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`])
         resultsBox.innerText += diceResults[`d${faces}Messages`].rollingMessage;
-        //animation code here
-        resultsBox.innerText += diceResults[`d${faces}Messages`].rolledResult;
-        if (isCrit('dangerous-crit')) {
-            resultsBox.innerText += diceResults[`d${faces}Messages`].dangerousCrit;
+
+        //animations script
+        function createDie(faces, result) {
+            const diceBox = document.createElement('div');
+            const rolledNumber = document.createElement('p');
+            diceBox.className = 'dice-box'
+            diceBox.innerHTML = `<img src="assets/images/d${faces}-blank.png" alt="Blank D${faces}">`;
+            diceBox.appendChild(rolledNumber);
+            animationsBox.appendChild(diceBox);
+            const numbers = getRandomNumbersFromFaces(faces);
+            for (let i = 0; i < animationVariations; i++) {
+                setTimeout(() => {
+                    rolledNumber.innerText = numbers[i % 4]
+                }, 150 * i);
+                setTimeout(() => {
+                    rolledNumber.innerText = result
+                }, 150 * animationVariations);
+            }
         }
-        resultsBox.innerText += diceResults[`d${faces}Messages`].resultAdded;
-        //reset count//
-        updateBadge(input, 0)
+
+        function getRandomNumbersFromFaces(faces) {
+            let numbers = [...new Array(faces).keys()];
+            numbers = numbers.map(n => n + 1);
+
+            //we sort the array 7 times to increase the randomness of the results (sorting once doesn't shuffle them much)
+            return numbers
+                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
+                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
+                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
+                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
+                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
+                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
+                .sort((a, b) => Math.floor((Math.random() * 3) - 1));
+        }
+
+        // animations code ends
+
+        setTimeout(() => {
+            resultsBox.innerText += diceResults[`d${faces}Messages`].rolledResult;
+            if (isCrit('dangerous-crit')) {
+                resultsBox.innerText += diceResults[`d${faces}Messages`].dangerousCrit;
+            }
+            resultsBox.innerText += diceResults[`d${faces}Messages`].resultAdded;
+            //reset count//
+            updateBadge(input, 0)
+        }, 150 * animationVariations + (refreshDelay * 2))
     }
-    let multipleDice = Object.keys(diceResults).length > 3;
-    if (multipleDice && modifier.value != 0) {
-        const addPlus = modifier.value > 0 ? '+' : '';
-        resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (${addPlus}${+modifier.value}) = ${diceResults.total + +modifier.value} \n`
-    } else if (modifier.value != 0) {
-        const addPlus = modifier.value > 0 ? '+' : '';
-        resultsBox.innerText += `\n(${addPlus}${+modifier.value}) = ${diceResults.total + +modifier.value} \n`
-    } else if (multipleDice) {
-        resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
-    }
-    console.log(diceResults)
+
+    setTimeout(() => {
+        let multipleDice = Object.keys(diceResults).length > 3;
+        if (multipleDice && modifier.value != 0) {
+            const addPlus = modifier.value > 0 ? '+' : '';
+            resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (${addPlus}${+modifier.value}) = ${diceResults.total + +modifier.value} \n`
+        } else if (modifier.value != 0) {
+            const addPlus = modifier.value > 0 ? '+' : '';
+            resultsBox.innerText += `\n(${addPlus}${+modifier.value}) = ${diceResults.total + +modifier.value} \n`
+        } else if (multipleDice) {
+            resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
+        }
+    }, 150 * animationVariations + (refreshDelay * 2))
 })
 
 function buildRolledMessage(diceType, results) {

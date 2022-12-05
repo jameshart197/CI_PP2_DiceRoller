@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 header,
 footer {
     width: 100%;
@@ -10,6 +15,7 @@ footer {
 
 header {
     justify-content: center;
+    height: 10vh;
 }
 
 footer {
@@ -32,6 +38,7 @@ main {
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
+    height: 78vh
 }
 
 main > div {
@@ -59,6 +66,7 @@ main > div {
     flex-direction: column;
     display: flex;
     font-size: 150%;
+    overflow-y: scroll;
 }
 
 #button-section {
@@ -135,6 +143,7 @@ main > div {
 #modifiers {
     width: 40%;
     font-size: 110%;
+    text-align: center;
 }
 
 .hidden {
