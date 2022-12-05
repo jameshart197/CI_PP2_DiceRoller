@@ -96,7 +96,7 @@ getRollButtonElement.addEventListener('click', () => {
         diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`])
         resultsBox.innerText += diceResults[`d${faces}Messages`].rollingMessage;
 
-        //animations script
+        //animation script
         function createDie(faces, result) {
             const diceBox = document.createElement('div');
             const rolledNumber = document.createElement('p');
@@ -130,8 +130,7 @@ getRollButtonElement.addEventListener('click', () => {
                 .sort((a, b) => Math.floor((Math.random() * 3) - 1));
         }
 
-        // animations code ends
-
+        const currentInput = input;
         setTimeout(() => {
             resultsBox.innerText += diceResults[`d${faces}Messages`].rolledResult;
             if (isCrit('dangerous-crit')) {
@@ -139,7 +138,7 @@ getRollButtonElement.addEventListener('click', () => {
             }
             resultsBox.innerText += diceResults[`d${faces}Messages`].resultAdded;
             //reset count//
-            updateBadge(input, 0)
+            updateBadge(currentInput, 0)
         }, 150 * animationVariations + (refreshDelay * 2))
     }
 
