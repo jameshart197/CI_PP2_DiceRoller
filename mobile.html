@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <link rel="stylesheet" href="assets/css/mobile.css">
+</head>
+
+<body>
+    <header>
+        <img class="logo" src="assets/images/no-text-logo.png" alt="Duck Pond D&D Logo">
+        <h1>Duck Pond Dice Roller</h1>
+    </header>
+    <div class="left-container">
+        <div class="dice-container">
+            <h2>D20</h2>
+            <img src="assets/images/d20.png" alt="D20 Image">
+            <div class="badge">0</div>
+            <input type="number" class="hidden" value="0" data-faces="20">
+        </div>
+        <div class="dice-container">
+            <h2>D12</h2>
+            <img src="assets/images/d12.png" alt="D12 Image">
+            <div class="badge">0</div>
+            <input type="number" class="hidden" value="0" data-faces="12">
+        </div>
+        <div class="dice-container">
+            <h2>D10</h2>
+            <img src="assets/images/d10.png" alt="D10 Image">
+            <div class="badge">0</div>
+            <input type="number" class="hidden" value="0" data-faces="10">
+        </div>
+        <div class="dice-container">
+            <h2>D8</h2>
+            <img src="assets/images/d8.png" alt="D8 Image">
+            <div class="badge">0</div>
+            <input type="number" class="hidden" value="0" data-faces="8">
+        </div>
+        <div class="dice-container">
+            <h2>D6</h2>
+            <img src="assets/images/d6.png" alt="D6 Image">
+            <div class="badge">0</div>
+            <input type="number" class="hidden" value="0" data-faces="6">
+        </div>
+        <div class="dice-container">
+            <h2>D4</h2>
+            <img src="assets/images/d4.png" alt="D4 Image">
+            <div class="badge">0</div>
+            <input type="number" class="hidden" value="0" data-faces="4">
+        </div>
+    </div>
+    <div id="animations-box">
+        <!-- This is where animations will be displayed when called in the scripts.js -->
+    </div>
+    <main>
+        <div class="clear-button">
+            <button id="clear">Clear</button>
+        </div>
+        <div id="results-box">
+            <!-- This is where the results go -->
+        </div>
+        <div id="button-section">
+            <button id="modifiers"></button>
+            <button id="standard-crit"></button>
+            <button id="dangerous-crit"></button>
+            <button id="roll-button">Roll!</button>
+        </div>
+    </main>
+    <div id="action-panel">
+
+    </div>
+    <footer class="absolute-bottom">
+        <div id="social-tags">
+            <a href="https://discord.gg/6sDt6MqTJA" target="_blank"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://twitch.tv/theduckpond" target="_blank"><i class="fa-brands fa-twitch"></i></a>
+            <a href="https://www.youtube.com/channel/UCKS7oW48d9jbvGP4jVXMNPQ" target="_blank"><i
+                    class="fa-brands fa-youtube"></i></a>
+            <a href="https://twitter.com/TheDuckPondDND" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://streamlabs.com/theduckpond2/merch" target="_blank"><i
+                    class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+    </footer>
+
+
+    <script src="https://kit.fontawesome.com/86633e9820.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

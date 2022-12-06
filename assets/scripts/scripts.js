@@ -31,8 +31,10 @@ function updateBadge(input, value) {
 }
 
 for (container of diceContainers) {
-    container.addEventListener("mouseup", (e) => {
+    container.addEventListener("contextmenu", (e) => {
         e.preventDefault();
+    })
+    container.addEventListener("mouseup", (e) => {
         const elements = {};
         for (child of e.target.parentElement.children) {
             if (child.tagName === 'DIV') {
