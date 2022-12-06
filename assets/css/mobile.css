@@ -1,0 +1,40 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 20vw 80vw;
+    grid-template-rows: 8vh 80vh 12vh;
+}
+
+.hidden { 
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+header {
+    background: green;
+    grid-column: span 2;
+}
+
+.left-container {
+    background: red;
+}
+
+#action-panel {
+    background: blue;
+    grid-column: span 2;
+}
+
+img {
+    max-width: 120px;
+    max-height: 120px;
+}
