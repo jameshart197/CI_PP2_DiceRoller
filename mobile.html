@@ -66,8 +66,8 @@
             15 <br>
         </div>
         <div id="button-section">
-            <button id="modifiers">+0</button>
-            <button id="standard-crit" class="active">
+            <button id="modifiers" data-actiontype="Modifiers">+0</button>
+            <button id="standard-crit" class="active" data-actiontype="Standard Critical">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="441.331px" height="441.332px"
                     viewBox="0 0 441.331 441.332" style="enable-background:new 0 0 441.331 441.332;"
@@ -87,7 +87,7 @@
                 </svg>
 
             </button>
-            <button id="dangerous-crit" class="active">
+            <button id="dangerous-crit" class="active" data-actiontype="Dangerous Critical">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 362.086 362.086"
                     style="enable-background:new 0 0 362.086 362.086;" xml:space="preserve">
@@ -185,7 +185,7 @@
         </div>
     </footer>
 
-
+    <script src="assets/scripts/action-panel-content.js"></script>
     <script src="https://kit.fontawesome.com/86633e9820.js" crossorigin="anonymous"></script>
 </body>
 

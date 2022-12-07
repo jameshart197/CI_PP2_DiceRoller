@@ -73,8 +73,19 @@ header h1 {
 }
 
 #action-panel {
-    background: blue;
     grid-area: actionpanel;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#action-panel > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    font-weight: bold;
 }
 
 /* The width takes the height value to make sure all dice are square images */
@@ -185,4 +196,28 @@ button svg {
 
 .active {
     background-color: rgb(5, 253, 5);
+}
+
+.minus-button {
+    font-size: 150%;
+    color: white;
+    background-color: rgb(177, 3, 3);
+    text-align: center;
+    font-weight: bold;
+    width: 30px;
+}
+
+.plus-button {
+    font-size: 150%;
+    font-weight: bold;
+    color: white;
+    background-color: green;
+}
+
+#action-input {
+    width: 60px;
+    height: 24px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 120%;
 }
