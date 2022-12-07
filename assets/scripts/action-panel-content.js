@@ -19,14 +19,23 @@ contentFactory.createValue = (labelText) => {
     `;
 };
 
+contentFactory.createToggle = (labelText) => {
+    return `
+    <div>
+    <label for="action-input">${labelText}</label>
+    </div>
+    <div>
+    <input type="checkbox" id="action-toggle" class="toggle">
+    <label for="action-toggle"></label>
+    </div>
+    `
+};
+
+
 for (button of buttons) {
     button.addEventListener('click', (e) => {
+        const actionLabel = e.currentTarget.dataset.actionlabel;
         const actionType = e.currentTarget.dataset.actiontype;
-        actionPanel.innerHTML = contentFactory.createValue(actionType);
+        actionPanel.innerHTML = contentFactory[actionType](actionLabel);
     })
 }
-
-
-
-
-

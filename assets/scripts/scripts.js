@@ -175,7 +175,6 @@ clearButton.addEventListener('click', () => {
 for (button of toggleButtons) {
     button.addEventListener('change', (e) => {
         if (e.currentTarget.checked) {
-            //alert('change detected')
             toggleButtons.forEach(tb => {
                 if (tb.id != e.currentTarget.id) {
                     tb.checked = false;
