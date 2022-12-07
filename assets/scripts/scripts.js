@@ -121,15 +121,12 @@ getRollButtonElement.addEventListener('click', () => {
             let numbers = [...new Array(faces).keys()];
             numbers = numbers.map(n => n + 1);
 
-            //we sort the array 7 times to increase the randomness of the results (sorting once doesn't shuffle them much)
+            //shuffle using a random weight modifier
+            const randomWeightModifier = 19
+            const randomWeightShift = Math.floor(randomWeightModifier / 2)
             return numbers
-                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
-                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
-                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
-                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
-                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
-                .sort((a, b) => Math.floor((Math.random() * 3) - 1))
-                .sort((a, b) => Math.floor((Math.random() * 3) - 1));
+                .sort((a, b) => 
+                Math.floor((Math.random() * randomWeightModifier) - randomWeightShift));
         }
 
         const currentInput = input;

@@ -7,6 +7,10 @@ body {
     display: grid;
     grid-template-columns: 20vw 80vw;
     grid-template-rows: 8vh 80vh 12vh;
+    grid-template-areas: 
+    "header header"
+    "dicecontainer resultsbox"
+    "actionpanel actionpanel";
 }
 
 .hidden { 
