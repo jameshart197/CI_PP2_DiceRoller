@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dice Roller</title>
     <link rel="stylesheet" href="assets/css/mobile.css">
+    <link rel="stylesheet" href="assets/css/desktop.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
 </head>
 
 <body class="grid-container">
@@ -40,8 +42,28 @@
             <img src="assets/images/d4.png" alt="D4 Image">
         </div>
     </div>
-    <div id="animations-box" class="mobile-hidden">
-        <!-- This is where animations will be displayed when called in the scripts.js -->
+    <div class="central-container mobile-hidden">
+        <div id="button-section-desktop">
+            <div class="criticals">
+                <input type="checkbox" id="standard-crit" class="toggle">
+                <label for="standard-crit">Standard Critical Hit</label>
+            </div>
+            <div id="modifier-container">
+                <i class="fa-solid fa-circle-minus" id="minus"></i>
+                <input type="text" id="modifiers-desktop" value="0">
+                <i class="fa-solid fa-circle-plus" id="plus"></i>
+            </div>
+            <div class="criticals">
+                <input type="checkbox" id="dangerous-crit" class="toggle">
+                <label for="dangerous-crit">Dangerous Critical Hit</label>
+            </div>
+        </div>
+        <div id="button-container">
+            <button id="roll-button-desktop" class="roll-button" data-actionlabel="Roll!">Roll!</button>
+        </div>
+        <div id="animations-box" class="mobile-hidden">
+            <!-- This is where animations will be displayed when called in the scripts.js -->
+        </div>
     </div>
     <main>
         <div class="clear-button">
@@ -50,7 +72,7 @@
         <div id="results-box">
             <!-- This is where the results go -->
         </div>
-        <div id="button-section">
+        <div id="button-section" class="desktop-hidden">
             <button id="modifiers" title="Modifiers" data-actionlabel="Modifiers" data-actiontype="createValue"
                 data-value="+0"></button>
             <button id="standard-crit" title="Standard Criticals" data-actionlabel="Standard Critical"

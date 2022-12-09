@@ -5,10 +5,17 @@ const resultsBox = document.getElementById("results-box");
 const animationsBox = document.getElementById("animations-box");
 const toggleButtons = document.querySelectorAll("button[data-actiontype='createToggle']");
 const modifier = document.getElementById("modifiers");
+const rollButtonDesktopElement = document.getElementById('roll-button-desktop');
 const animationVariations = 8;
+const minusModifier = document.getElementById('minus');
+const plusModifier = document.getElementById('plus')
+const modifierDesktop = document.getElementById('modifiers-desktop')
 let refreshDelay = 250;
 let messageDelay = 150;
 
+rollButtonDesktopElement.addEventListener("click", (e) => {
+    actions["Roll!"](e);
+  });
 
 actions.toggleButton = (checked, button) => {
     button.dataset.checked = checked;
@@ -21,6 +28,20 @@ actions.toggleButton = (checked, button) => {
       }
     }
 }
+
+minusModifier.addEventListener('click', () => {
+    updateModifier(modifierDesktop, +modifierDesktop.value - 1);
+})
+
+plusModifier.addEventListener('click', () => {
+    updateModifier(modifierDesktop, +modifierDesktop.value + 1);
+})
+
+function updateModifier(input, value) {
+    modifierDesktop.value = value;
+    modifierDesktop.innerText = value;
+}
+
 
 actions.changeValueFromEvent = (e) => {
     const button = e.currentTarget;

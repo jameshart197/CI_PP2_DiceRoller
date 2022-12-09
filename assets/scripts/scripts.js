@@ -1,5 +1,5 @@
 const diceContainers = document.getElementsByClassName('dice-container');
-const getRollButtonElement = document.getElementById('roll-button');
+const rollButtonDesktopElement = document.getElementById('roll-button-desktop');
 const allDiceInputElements = document.querySelectorAll('.dice-container input');
 const resultsBox = document.getElementById('results-box');
 const clearButton = document.getElementById('clear')
@@ -11,6 +11,11 @@ const animationsBox = document.getElementById('animations-box');
 const animationVariations = 8
 const refreshDelay = 250
 
+
+rollButtonDesktopElement.addEventListener("click", (e) => {
+    actions[labelText](e);
+  });
+  
 minusModifier.addEventListener('click', () => {
     updateModifier(modifier, +modifier.value - 1);
 })
@@ -65,7 +70,7 @@ for (container of diceContainers) {
 
 //We rolled 2 d20 and 1d12 and got 5, 4, 10. 
 
-getRollButtonElement.addEventListener('click', () => {
+rollButtonDesktopElement.addEventListener('click', () => {
     animationsBox.innerHTML = '';
     let diceResults = {};
     diceResults.total = 0;
