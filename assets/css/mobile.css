@@ -1,27 +1,36 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     padding: 0;
     margin: 0;
     font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
+
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: 20vw 80vw;
     grid-template-rows: 8vh 80vh 12vh;
-    grid-template-areas: 
-    "head head"
-    "leftcontainer main"
-    "actionpanel actionpanel";
+    grid-template-areas:
+        "head head"
+        "leftcontainer main"
+        "actionpanel actionpanel";
 }
 
-.hidden, .mobile-hidden { 
+.hidden,
+.mobile-hidden {
     position: absolute;
     width: 1px;
     height: 1px;
     padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0,0,0,0);
+    clip: rect(0, 0, 0, 0);
     border: 0;
 }
 
@@ -33,13 +42,15 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    
-    --button-section-height: 33px;
+
+    --button-section-height: 40px;
 }
 
-body > div {
+body>div {
     border: thin black solid;
 }
+
+
 
 header,
 footer {
@@ -86,7 +97,7 @@ header h1 {
     align-items: center;
 }
 
-#action-panel > div {
+#action-panel>div {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -99,13 +110,6 @@ header h1 {
 .dice-container img {
     width: 12vh;
     height: 12vh;
-}
-
-.dice-container {
-    display: flex;
-    padding: .5em;
-    align-items: center;
-    padding: 0 .5em;
 }
 
 .dice-container {
@@ -132,7 +136,7 @@ header h1 {
     justify-content: center;
     align-items: center;
     bottom: 0;
-    right: 0;    
+    right: 0;
 }
 
 .roll-button {
@@ -172,9 +176,20 @@ header h1 {
     height: inherit;
     font-size: 18px;
     border: none;
-    border-radius: 5px;    
+    border-radius: 5px;
     padding: 4px;
     transition: .3s;
+}
+
+#button-section button.active {
+    height: var(--button-section-height);
+    padding-right: 3px;
+    font-size: 28px;
+    box-shadow: 3px 3px 10px #333;
+}
+
+#button-section button[data-checked='true'] {
+    background-color: greenyellow;
 }
 
 button svg {
@@ -190,10 +205,18 @@ button svg {
     background-color: rgb(209, 122, 122);
 }
 
+#roll-button {
+    background-color: #9a4ef1;
+}
+
 #modifiers {
     background-color: rgb(115, 138, 243);
-    width: 43px;
+    width: 64px;
     font-weight: bold;
+}
+
+#modifiers:after {
+    content: attr(data-value);
 }
 
 #clear {
@@ -211,23 +234,22 @@ button svg {
     font-weight: bold;
 }
 
-.active {
-    background-color: rgb(5, 253, 5);
-}
-
-.minus-button {
+.minus-button,
+.plus-button {
     font-size: 150%;
     color: white;
-    background-color: rgb(177, 3, 3);
     text-align: center;
     font-weight: bold;
     width: 30px;
+    border: none;
+    border-radius: 5px;
+}
+
+.minus-button {
+    background-color: rgb(177, 3, 3);
 }
 
 .plus-button {
-    font-size: 150%;
-    font-weight: bold;
-    color: white;
     background-color: green;
 }
 
@@ -245,47 +267,47 @@ input[type="checkbox"].toggle {
     opacity: 0;
     position: absolute;
     left: -9000px;
-   }
-   
-   input[type="checkbox"].toggle + label {
-       position: relative;
-       display: flex;
-       align-items: center;
-       cursor: pointer;
-   }
-   
-   input[type="checkbox"].toggle + label::before {
-       content: "";
-       width: 3em;
-       height: 1.5em;
-       background-color: rgb(192, 128, 128);
-       border-radius: 1em;
-       margin-right: .25em;
-       transition: background-color 250ms ease-in-out;
-       outline: 1px solid black;
-   }
-   
-   input[type="checkbox"].toggle:hover + label::before {
+}
+
+input[type="checkbox"].toggle+label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+input[type="checkbox"].toggle+label::before {
+    content: "";
+    width: 3em;
+    height: 1.5em;
+    background-color: rgb(192, 128, 128);
+    border-radius: 1em;
+    margin-right: .25em;
+    transition: background-color 250ms ease-in-out;
     outline: 1px solid black;
-   }
-   
-   input[type="checkbox"].toggle + label::after {
-       position: absolute;
-       left: .1em;
-       content: "";
-       width: 1.4em;
-       height: 1.4em;
-       background-color: rgb(224, 5, 5);
-       border-radius: 1em;
-       transition: background-color 250ms ease-in-out, transform 200ms ease-in-out;
-   }
-   
-   input[type="checkbox"].toggle:checked + label::after {
-       transform: translateX(100%);
-       background-color: rgb(5, 224, 176);
-       border-radius: 1em;
-   }
-   
-   input[type="checkbox"].toggle:checked + label::before {
-       background-color: rgb(14, 76, 247);
-   }
+}
+
+input[type="checkbox"].toggle:hover+label::before {
+    outline: 1px solid black;
+}
+
+input[type="checkbox"].toggle+label::after {
+    position: absolute;
+    left: .1em;
+    content: "";
+    width: 1.4em;
+    height: 1.4em;
+    background-color: rgb(224, 5, 5);
+    border-radius: 1em;
+    transition: background-color 250ms ease-in-out, transform 200ms ease-in-out;
+}
+
+input[type="checkbox"].toggle:checked+label::after {
+    transform: translateX(100%);
+    background-color: rgb(5, 224, 176);
+    border-radius: 1em;
+}
+
+input[type="checkbox"].toggle:checked+label::before {
+    background-color: rgb(14, 76, 247);
+}
