@@ -14,7 +14,7 @@ body {
     "actionpanel actionpanel";
 }
 
-.hidden { 
+.hidden, .mobile-hidden { 
     position: absolute;
     width: 1px;
     height: 1px;
@@ -30,6 +30,10 @@ main {
     background-color: #ebebeb;
     position: relative;
     padding: 0.2em 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
     --button-section-height: 33px;
 }
 
@@ -70,6 +74,8 @@ header h1 {
     justify-content: space-evenly;
     align-items: center;
     grid-area: leftcontainer;
+    position: relative;
+    z-index: 1;
 }
 
 #action-panel {
@@ -102,43 +108,48 @@ header h1 {
     padding: 0 .5em;
 }
 
-.dice-container h2 {
-    padding: 0 .5em;
-    display: none;
+.dice-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: -18px;
+    transition: .6s;
 }
 
-.badge {
+.dice-container.active {
+    left: 30px;
+}
+
+.dice-container:after {
+    content: attr(data-value);
+    position: absolute;
     background-color: red;
     color: white;
     border-radius: 50%;
     width: 1.5rem;
     height: 1.5rem;
-    display: grid;
+    display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    bottom: 0.6em;
-    left: -1em;
+    bottom: 0;
+    right: 0;    
 }
 
-#roll-button {
-    padding: .3em 2em;
+.roll-button {
     border-radius: 2em;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     color: #FFFFFF;
     background-color: #9a4ef1;
-    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-    text-align: center;
+    text-shadow: 0 0.04em 0.04em rgb(0 0 0 / 35%);
     min-height: 30px;
-    min-width: 100px;
-    font-size: 100%;
+    min-width: 116px;
+    border: none;
 }
 
 #button-section {
-    height: var(--button-section-height);
+    height: calc(var(--button-section-height) - 10px);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -147,17 +158,23 @@ header h1 {
 .clear-button {
     position: absolute;
     top: 2px;
-    right: 2px;
+    right: 1em;
 }
 
 #results-box {
     height: calc(100% - var(--button-section-height));
     padding: 0 2em 0.2em 2em;
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 #button-section button {
     height: inherit;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;    
+    padding: 4px;
+    transition: .3s;
 }
 
 button svg {
