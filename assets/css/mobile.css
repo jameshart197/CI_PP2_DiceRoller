@@ -197,11 +197,11 @@ button svg {
     width: 100%;
 }
 
-#standard-crit {
+#standard-crit-mobile {
     background-color: rgb(209, 122, 122);
 }
 
-#dangerous-crit {
+#dangerous-crit-mobile {
     background-color: rgb(209, 122, 122);
 }
 

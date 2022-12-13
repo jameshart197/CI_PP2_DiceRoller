@@ -25,6 +25,8 @@ for (let toggleButton of toggleButtonsDesktop) {
     });
 }
 
+
+
 rollButtonDesktopElement.addEventListener("click", (e) => {
     actions["Roll!"](e);
 });
@@ -96,7 +98,7 @@ actions.changeValue = (val, button, textInput) => {
 }
 
 actions["Roll!"] = () => {
-    if(diceBox.filter(dice => +dice.dataset.value > 0).length === 0) {
+    if (diceBox.filter(dice => +dice.dataset.value > 0).length === 0) {
         return
     }
     //Find out if is mobile or desktop (or tablet, smartphone or thing)
@@ -108,14 +110,15 @@ actions["Roll!"] = () => {
     if (constants.isMobile()) {
         refreshDelay = 75;
         messageDelay = 20;
-        rollingOptions.standardCritical = false;
-        rollingOptions.dangerousCritical = true;
-        rollingOptions.modifier = 3;
+        rollingOptions.modifier = +modifier.dataset.value;
+        rollingOptions.standardCritical = isCrit('standard-crit-mobile');
+    rollingOptions.dangerousCritical = isCrit('dangerous-crit-mobile');
     } else if (constants.isDesktop()) {
-        rollingOptions.standardCritical = true;
-        rollingOptions.dangerousCritical = false;
-        rollingOptions.modifier = 23;
+        rollingOptions.modifier = +modifierDesktop.value;
+        rollingOptions.standardCritical = isCrit('standard-crit');
+        rollingOptions.dangerousCritical = isCrit('dangerous-crit');
     }
+    
     getRollingInformation(diceResults, rollingOptions);
     displayCombinedResults(diceResults, rollingOptions);
 }
@@ -184,9 +187,17 @@ function getRollingInformation(diceResults, rollingOptions) {
 //THIS IS A SPACE WHERE THINGS GO
 
 function isCrit(id) {
-    for (let button of toggleButtons) {
-        if (button.id === id) {
-            return JSON.parse(button.dataset.checked ?? false);
+    if (constants.isMobile()) {
+        for (let button of toggleButtons) {
+            if (button.id === id) {
+                return JSON.parse(button.dataset.checked ?? false);
+            }
+        }
+    } else {
+        for (let checkbox of toggleButtonsDesktop) {
+            if (checkbox.id === id) {
+                return JSON.parse(checkbox.checked ?? false);
+            }
         }
     }
 }
@@ -200,7 +211,7 @@ function buildRolledMessage(diceType, results, rollingOptions) {
     rolledMessages.rollingMessage = `\n Rolling ${results.length}d${diceType}... \n`
     rolledMessages.rolledResult = `\n Rolled (${results.join(' + ')})`
     rolledMessages.resultAdded = `\n Total = ${subTotal} \n`
-    rolledMessages.dangerousCrit = `\n Dangerous Crits (${results.map((a) => diceType).join(' + ')})`
+    rolledMessages.dangerousCrit = `\n+ Dangerous Crits (${results.map((a) => diceType).join(' + ')})`
     return rolledMessages;
 }
 
