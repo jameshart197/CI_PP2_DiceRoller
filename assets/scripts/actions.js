@@ -25,8 +25,6 @@ for (let toggleButton of toggleButtonsDesktop) {
     });
 }
 
-
-
 rollButtonDesktopElement.addEventListener("click", (e) => {
     actions["Roll!"](e);
 });
@@ -112,7 +110,7 @@ actions["Roll!"] = () => {
         messageDelay = 20;
         rollingOptions.modifier = +modifier.dataset.value;
         rollingOptions.standardCritical = isCrit('standard-crit-mobile');
-    rollingOptions.dangerousCritical = isCrit('dangerous-crit-mobile');
+        rollingOptions.dangerousCritical = isCrit('dangerous-crit-mobile');
     } else if (constants.isDesktop()) {
         rollingOptions.modifier = +modifierDesktop.value;
         rollingOptions.standardCritical = isCrit('standard-crit');
@@ -168,8 +166,6 @@ function getRollingInformation(diceResults, rollingOptions) {
         diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`], rollingOptions)
         resultsBox.innerText += diceResults[`d${faces}Messages`].rollingMessage;
 
-
-
         const currentCounter = dieCounter;
         setTimeout(() => {
             resultsBox.innerText += diceResults[`d${faces}Messages`].rolledResult;
@@ -183,8 +179,6 @@ function getRollingInformation(diceResults, rollingOptions) {
         }, messageDelay * animationVariations + (refreshDelay * 2))
     }
 }
-
-//THIS IS A SPACE WHERE THINGS GO
 
 function isCrit(id) {
     if (constants.isMobile()) {
@@ -206,7 +200,7 @@ function buildRolledMessage(diceType, results, rollingOptions) {
     const rolledMessages = {};
     let subTotal = results.reduce((runningTotal, a) => runningTotal + a, 0);
     if (rollingOptions.dangerousCritical) {
-        subTotal += results.map((a) => diceType).reduce((runningTotal, a) => runningTotal + a, 0);
+        subTotal += results.map(() => diceType).reduce((runningTotal, a) => runningTotal + a, 0);
     }
     rolledMessages.rollingMessage = `\n Rolling ${results.length}d${diceType}... \n`
     rolledMessages.rolledResult = `\n Rolled (${results.join(' + ')})`
@@ -229,7 +223,7 @@ function createDie(faces, result) {
     const numbers = getRandomNumbersFromFaces(faces);
     for (let i = 0; i < animationVariations; i++) {
         setTimeout(() => {
-            rolledNumber.innerText = numbers[i % 4]
+            rolledNumber.innerText = numbers[i % faces]
         }, messageDelay * i);
         setTimeout(() => {
             rolledNumber.innerText = result
@@ -248,8 +242,6 @@ function getRandomNumbersFromFaces(faces) {
         .sort((a, b) =>
             Math.floor((Math.random() * randomWeightModifier) - randomWeightShift));
 }
-
-//THIS IS THE END OF A SPACE WHERE THINGS GO
 
 actions.clearResults = () => {
     resultsBox.innerHTML = '';

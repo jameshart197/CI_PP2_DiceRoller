@@ -90,27 +90,7 @@ for (let button of buttons) {
 
     if (constants.isMobile()) {
       contentFactory[actionType](actionLabel, button);
-    } else {
-      switch (actionType) {
-        case "createValue":
-          actions.changeValueFromEvent(e);
-          break;
-
-        case "createToggle":
-          actions.toggleButton(
-            !JSON.parse(e.currentTarget.dataset.checked ?? false),
-            button
-          );
-          break;
-
-        case "createButton":
-          actions[actionLabel](e);
-          break;
-
-        default:
-          break;
-      }
-    }
+    } 
     button.classList.add("active");
   });
 }
