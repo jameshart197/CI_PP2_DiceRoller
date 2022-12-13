@@ -4,6 +4,7 @@ const diceCounters = document.getElementsByClassName("dice-container");
 const resultsBox = document.getElementById("results-box");
 const animationsBox = document.getElementById("animations-box");
 const toggleButtons = document.querySelectorAll("button[data-actiontype='createToggle']");
+const toggleButtonsDesktop = [document.getElementsByClassName('toggle-desktop')[0], document.getElementsByClassName('toggle-desktop')[1]];
 const modifier = document.getElementById("modifiers");
 const rollButtonDesktopElement = document.getElementById('roll-button-desktop');
 const animationVariations = 8;
@@ -12,6 +13,12 @@ const plusModifier = document.getElementById('plus')
 const modifierDesktop = document.getElementById('modifiers-desktop')
 let refreshDelay = 250;
 let messageDelay = 150;
+
+for (let toggleButton of toggleButtonsDesktop) {
+    toggleButton.addEventListener("change", (e) => {
+        actions.toggleButton(e.currentTarget.checked, button);
+      });
+}
 
 rollButtonDesktopElement.addEventListener("click", (e) => {
     actions["Roll!"](e);
