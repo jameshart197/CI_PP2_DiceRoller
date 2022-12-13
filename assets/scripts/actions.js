@@ -24,8 +24,6 @@ for (let toggleButton of toggleButtonsDesktop) {
     });
 }
 
-
-
 rollButtonDesktopElement.addEventListener("click", (e) => {
     actions["Roll!"](e);
 });
@@ -105,23 +103,23 @@ actions["Roll!"] = () => {
         messageDelay = 20;
     }
     getRollingInformation(diceResults);
-
-    setTimeout(() => {
-        let multipleDice = Object.keys(diceResults).length > 3;
-        const modValue = +modifier.dataset.value;
-        if (multipleDice && modValue != 0) {
-            const addPlus = modValue > 0 ? '+' : '';
-            resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
-        } else if (modValue != 0) {
-            const addPlus = modValue > 0 ? '+' : '';
-            resultsBox.innerText += `\n(${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
-        } else if (multipleDice) {
-            resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
-        }
-        resultsBox.scrollTo(0, resultsBox.scrollHeight);
-    }, messageDelay * animationVariations + (refreshDelay * 2))
+    setTimeout(displayCombinedResults, messageDelay * animationVariations + (refreshDelay * 2))
 }
 
+function displayCombinedResults() {
+    let multipleDice = Object.keys(diceResults).length > 3;
+    const modValue = +modifier.dataset.value;
+    if (multipleDice && modValue != 0) {
+        const addPlus = modValue > 0 ? '+' : '';
+        resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
+    } else if (modValue != 0) {
+        const addPlus = modValue > 0 ? '+' : '';
+        resultsBox.innerText += `\n(${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
+    } else if (multipleDice) {
+        resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
+    }
+    resultsBox.scrollTo(0, resultsBox.scrollHeight);
+}
 
 function getRollingInformation(diceResults) {
     for (let dieCounter of diceCounters) {
