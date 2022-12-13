@@ -1,6 +1,7 @@
 import constants from "./constants.js";
 const actions = {};
 const diceCounters = document.getElementsByClassName("dice-container");
+const diceBox = [...diceCounters];
 const resultsBox = document.getElementById("results-box");
 const animationsBox = document.getElementById("animations-box");
 const toggleButtons = document.querySelectorAll("button[data-actiontype='createToggle']");
@@ -95,33 +96,48 @@ actions.changeValue = (val, button, textInput) => {
 }
 
 actions["Roll!"] = () => {
+    if(diceBox.filter(dice => +dice.dataset.value > 0).length === 0) {
+        return
+    }
+    //Find out if is mobile or desktop (or tablet, smartphone or thing)
+
     animationsBox.innerHTML = '';
-    let diceResults = {};
+    const diceResults = {};
+    const rollingOptions = {};
     diceResults.total = 0;
     if (constants.isMobile()) {
         refreshDelay = 75;
         messageDelay = 20;
+        rollingOptions.standardCritical = false;
+        rollingOptions.dangerousCritical = true;
+        rollingOptions.modifier = 3;
+    } else if (constants.isDesktop()) {
+        rollingOptions.standardCritical = true;
+        rollingOptions.dangerousCritical = false;
+        rollingOptions.modifier = 23;
     }
-    getRollingInformation(diceResults);
-    setTimeout(displayCombinedResults, messageDelay * animationVariations + (refreshDelay * 2))
+    getRollingInformation(diceResults, rollingOptions);
+    displayCombinedResults(diceResults, rollingOptions);
 }
 
-function displayCombinedResults() {
-    let multipleDice = Object.keys(diceResults).length > 3;
-    const modValue = +modifier.dataset.value;
-    if (multipleDice && modValue != 0) {
-        const addPlus = modValue > 0 ? '+' : '';
-        resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
-    } else if (modValue != 0) {
-        const addPlus = modValue > 0 ? '+' : '';
-        resultsBox.innerText += `\n(${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
-    } else if (multipleDice) {
-        resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
-    }
-    resultsBox.scrollTo(0, resultsBox.scrollHeight);
+function displayCombinedResults(diceResults, rollingOptions) {
+    setTimeout(() => {
+        let multipleDice = Object.keys(diceResults).length > 3;
+        const modValue = rollingOptions.modifier;
+        if (multipleDice && modValue != 0) {
+            const addPlus = modValue > 0 ? '+' : '';
+            resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
+        } else if (modValue != 0) {
+            const addPlus = modValue > 0 ? '+' : '';
+            resultsBox.innerText += `\n(${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
+        } else if (multipleDice) {
+            resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
+        }
+        resultsBox.scrollTo(0, resultsBox.scrollHeight);
+    }, messageDelay * animationVariations + (refreshDelay * 2))
 }
 
-function getRollingInformation(diceResults) {
+function getRollingInformation(diceResults, rollingOptions) {
     for (let dieCounter of diceCounters) {
         let diceQuantity = +dieCounter.dataset.value;
         if (diceQuantity === 0) {
@@ -129,7 +145,7 @@ function getRollingInformation(diceResults) {
         }
         //find number of faces on dice//
         const faces = +dieCounter.getAttribute('data-faces');
-        if (isCrit('standard-crit')) {
+        if (rollingOptions.standardCritical) {
             diceQuantity *= 2;
         }
         //create array of results for each dice rolled and roll dice//
@@ -141,12 +157,12 @@ function getRollingInformation(diceResults) {
                 createDie(faces, result)
             }, refreshDelay)
             diceResults.total += result
-            if (isCrit('dangerous-crit')) {
+            if (rollingOptions.dangerousCritical) {
                 diceResults.total += faces;
             }
         }
         //display results//
-        diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`])
+        diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`], rollingOptions)
         resultsBox.innerText += diceResults[`d${faces}Messages`].rollingMessage;
 
 
@@ -154,7 +170,7 @@ function getRollingInformation(diceResults) {
         const currentCounter = dieCounter;
         setTimeout(() => {
             resultsBox.innerText += diceResults[`d${faces}Messages`].rolledResult;
-            if (isCrit('dangerous-crit')) {
+            if (rollingOptions.dangerousCritical) {
                 resultsBox.innerText += diceResults[`d${faces}Messages`].dangerousCrit;
             }
             resultsBox.innerText += diceResults[`d${faces}Messages`].resultAdded;
@@ -175,10 +191,10 @@ function isCrit(id) {
     }
 }
 
-function buildRolledMessage(diceType, results) {
+function buildRolledMessage(diceType, results, rollingOptions) {
     const rolledMessages = {};
     let subTotal = results.reduce((runningTotal, a) => runningTotal + a, 0);
-    if (isCrit('dangerous-crit')) {
+    if (rollingOptions.dangerousCritical) {
         subTotal += results.map((a) => diceType).reduce((runningTotal, a) => runningTotal + a, 0);
     }
     rolledMessages.rollingMessage = `\n Rolling ${results.length}d${diceType}... \n`

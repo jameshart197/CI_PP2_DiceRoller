@@ -115,6 +115,8 @@ for (let button of buttons) {
   });
 }
 
+if(constants.isMobile()) {
 var evt = document.createEvent("MouseEvents");
 evt.initEvent("mouseup", true, true);
 rollButton.dispatchEvent(evt);
+}
