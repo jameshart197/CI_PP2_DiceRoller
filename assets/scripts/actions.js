@@ -17,26 +17,28 @@ let messageDelay = 150;
 for (let toggleButton of toggleButtonsDesktop) {
     toggleButton.addEventListener("change", (e) => {
         for (let button of toggleButtonsDesktop) {
-            if(button.id !== e.currentTarget.id) {
-            button.checked = false;   
+            if (button.id !== e.currentTarget.id) {
+                button.checked = false;
             }
         }
-      });
+    });
 }
+
+
 
 rollButtonDesktopElement.addEventListener("click", (e) => {
     actions["Roll!"](e);
-  });
+});
 
 actions.toggleButton = (checked, button) => {
     button.dataset.checked = checked;
     for (let otherButton of toggleButtons) {
-      if (
-        button != otherButton &&
-        otherButton.dataset.actiontype === "createToggle"
-      ) {
-        otherButton.dataset.checked = false;
-      }
+        if (
+            button != otherButton &&
+            otherButton.dataset.actiontype === "createToggle"
+        ) {
+            otherButton.dataset.checked = false;
+        }
     }
 }
 
@@ -53,35 +55,43 @@ function updateModifier(input, value) {
     modifierDesktop.innerText = value;
 }
 
-
+/**
+ * Increments or decrements the desktop dice
+ * @param {Event} e the event handler from the mouseup event on dice 
+ */
 actions.changeValueFromEvent = (e) => {
     const button = e.currentTarget;
     switch (e.button) {
         case 0:
-          actions.changeValue(1, button);
-          break;
+            actions.changeValue(1, button);
+            break;
         case 2:
-          actions.changeValue(-1, button);
-          break;
-  
+            actions.changeValue(-1, button);
+            break;
+
         default:
-          break;
-      }
+            break;
+    }
 }
 
-
+/**
+ * Increments or decrements the mobile dice and modifiers
+ * @param {number} val Value to add or subtract 
+ * @param {HTMLButtonElement} button Dice or Modifier in question
+ * @param {HTMLInputElement} textInput Value on dice or modifier in question
+ */
 actions.changeValue = (val, button, textInput) => {
-    if(JSON.parse(button.dataset.positive ?? false) && +button.dataset.value + val < 0) {
+    if (JSON.parse(button.dataset.positive ? ? false) && +button.dataset.value + val < 0) {
         return;
-    } 
+    }
 
     button.dataset.value = +button.dataset.value + val;
-    if(!button.dataset.positive) {
-        if(button.dataset.value >= 0) {
+    if (!button.dataset.positive) {
+        if (button.dataset.value >= 0) {
             button.dataset.value = `+${button.dataset.value}`;
         }
     }
-    if(textInput) {
+    if (textInput) {
         textInput.value = button.dataset.value;
     }
 }
@@ -90,12 +100,30 @@ actions["Roll!"] = () => {
     animationsBox.innerHTML = '';
     let diceResults = {};
     diceResults.total = 0;
-    if(constants.isMobile()) {
+    if (constants.isMobile()) {
         refreshDelay = 75;
         messageDelay = 20;
     }
+    getRollingInformation(diceResults);
+
+    setTimeout(() => {
+        let multipleDice = Object.keys(diceResults).length > 3;
+        const modValue = +modifier.dataset.value;
+        if (multipleDice && modValue != 0) {
+            const addPlus = modValue > 0 ? '+' : '';
+            resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
+        } else if (modValue != 0) {
+            const addPlus = modValue > 0 ? '+' : '';
+            resultsBox.innerText += `\n(${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
+        } else if (multipleDice) {
+            resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
+        }
+        resultsBox.scrollTo(0, resultsBox.scrollHeight);
+    }, messageDelay * animationVariations + (refreshDelay * 2))
+}
 
 
+function getRollingInformation(diceResults) {
     for (let dieCounter of diceCounters) {
         let diceQuantity = +dieCounter.dataset.value;
         if (diceQuantity === 0) {
@@ -123,60 +151,7 @@ actions["Roll!"] = () => {
         diceResults[`d${faces}Messages`] = buildRolledMessage(faces, diceResults[`d${faces}Results`])
         resultsBox.innerText += diceResults[`d${faces}Messages`].rollingMessage;
 
-        function isCrit(id) {
-            for (let button of toggleButtons) {
-                if (button.id === id) {
-                    return JSON.parse(button.dataset.checked ?? false);
-                }
-            }
-        }
 
-        function buildRolledMessage(diceType, results) {
-            const rolledMessages = {};
-            let subTotal = results.reduce((runningTotal, a) => runningTotal + a, 0);
-            if (isCrit('dangerous-crit')) {
-                subTotal += results.map((a) => diceType).reduce((runningTotal, a) => runningTotal + a, 0);
-            }
-            rolledMessages.rollingMessage = `\n Rolling ${results.length}d${diceType}... \n`
-            rolledMessages.rolledResult = `\n Rolled (${results.join(' + ')})`
-            rolledMessages.resultAdded = `\n Total = ${subTotal} \n`
-            rolledMessages.dangerousCrit = `\n Dangerous Crits (${results.map((a) => diceType).join(' + ')})`
-            return rolledMessages;
-        }
-
-        //animation script
-        function createDie(faces, result) {
-            if(constants.isMobile()) {
-                return;
-            }
-            const diceBox = document.createElement('div');
-            const rolledNumber = document.createElement('p');
-            diceBox.className = 'dice-box'
-            diceBox.innerHTML = `<img src="assets/images/d${faces}-blank.png" alt="Blank D${faces}">`;
-            diceBox.appendChild(rolledNumber);
-            animationsBox.appendChild(diceBox);
-            const numbers = getRandomNumbersFromFaces(faces);
-            for (let i = 0; i < animationVariations; i++) {
-                setTimeout(() => {
-                    rolledNumber.innerText = numbers[i % 4]
-                }, messageDelay * i);
-                setTimeout(() => {
-                    rolledNumber.innerText = result
-                }, messageDelay * animationVariations);
-            }
-        }
-
-        function getRandomNumbersFromFaces(faces) {
-            let numbers = [...new Array(faces).keys()];
-            numbers = numbers.map(n => n + 1);
-
-            //shuffle using a random weight modifier
-            const randomWeightModifier = 19
-            const randomWeightShift = Math.floor(randomWeightModifier / 2)
-            return numbers
-                .sort((a, b) => 
-                Math.floor((Math.random() * randomWeightModifier) - randomWeightShift));
-        }
 
         const currentCounter = dieCounter;
         setTimeout(() => {
@@ -190,22 +165,66 @@ actions["Roll!"] = () => {
             resultsBox.scrollTo(0, resultsBox.scrollHeight);
         }, messageDelay * animationVariations + (refreshDelay * 2))
     }
-
-    setTimeout(() => {
-        let multipleDice = Object.keys(diceResults).length > 3;
-        const modValue = +modifier.dataset.value;
-        if (multipleDice && modValue != 0) {
-            const addPlus = modValue > 0 ? '+' : '';
-            resultsBox.innerText += `\n Combined total = ${diceResults.total} \n (${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
-        } else if (modValue != 0) {
-            const addPlus = modValue > 0 ? '+' : '';
-            resultsBox.innerText += `\n(${addPlus}${modValue}) = ${diceResults.total + modValue} \n`
-        } else if (multipleDice) {
-            resultsBox.innerText += `\n Combined total = ${diceResults.total} \n`
-        }
-        resultsBox.scrollTo(0, resultsBox.scrollHeight);
-    }, messageDelay * animationVariations + (refreshDelay * 2))
 }
+
+//THIS IS A SPACE WHERE THINGS GO
+
+function isCrit(id) {
+    for (let button of toggleButtons) {
+        if (button.id === id) {
+            return JSON.parse(button.dataset.checked ?? false);
+        }
+    }
+}
+
+function buildRolledMessage(diceType, results) {
+    const rolledMessages = {};
+    let subTotal = results.reduce((runningTotal, a) => runningTotal + a, 0);
+    if (isCrit('dangerous-crit')) {
+        subTotal += results.map((a) => diceType).reduce((runningTotal, a) => runningTotal + a, 0);
+    }
+    rolledMessages.rollingMessage = `\n Rolling ${results.length}d${diceType}... \n`
+    rolledMessages.rolledResult = `\n Rolled (${results.join(' + ')})`
+    rolledMessages.resultAdded = `\n Total = ${subTotal} \n`
+    rolledMessages.dangerousCrit = `\n Dangerous Crits (${results.map((a) => diceType).join(' + ')})`
+    return rolledMessages;
+}
+
+//animation script
+function createDie(faces, result) {
+    if (constants.isMobile()) {
+        return;
+    }
+    const diceBox = document.createElement('div');
+    const rolledNumber = document.createElement('p');
+    diceBox.className = 'dice-box'
+    diceBox.innerHTML = `<img src="assets/images/d${faces}-blank.png" alt="Blank D${faces}">`;
+    diceBox.appendChild(rolledNumber);
+    animationsBox.appendChild(diceBox);
+    const numbers = getRandomNumbersFromFaces(faces);
+    for (let i = 0; i < animationVariations; i++) {
+        setTimeout(() => {
+            rolledNumber.innerText = numbers[i % 4]
+        }, messageDelay * i);
+        setTimeout(() => {
+            rolledNumber.innerText = result
+        }, messageDelay * animationVariations);
+    }
+}
+
+function getRandomNumbersFromFaces(faces) {
+    let numbers = [...new Array(faces).keys()];
+    numbers = numbers.map(n => n + 1);
+
+    //shuffle using a random weight modifier
+    const randomWeightModifier = 19
+    const randomWeightShift = Math.floor(randomWeightModifier / 2)
+    return numbers
+        .sort((a, b) =>
+            Math.floor((Math.random() * randomWeightModifier) - randomWeightShift));
+}
+
+//THIS IS THE END OF A SPACE WHERE THINGS GO
 
 actions.clearResults = () => {
     resultsBox.innerHTML = '';
