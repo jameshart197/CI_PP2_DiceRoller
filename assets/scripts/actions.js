@@ -16,7 +16,11 @@ let messageDelay = 150;
 
 for (let toggleButton of toggleButtonsDesktop) {
     toggleButton.addEventListener("change", (e) => {
-        actions.toggleButton(e.currentTarget.checked, button);
+        for (let button of toggleButtonsDesktop) {
+            if(button.id !== e.currentTarget.id) {
+            button.checked = false;   
+            }
+        }
       });
 }
 
