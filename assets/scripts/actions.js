@@ -81,7 +81,7 @@ actions.changeValueFromEvent = (e) => {
  * @param {HTMLInputElement} textInput Value on dice or modifier in question
  */
 actions.changeValue = (val, button, textInput) => {
-    if (JSON.parse(button.dataset.positive ? ? false) && +button.dataset.value + val < 0) {
+    if (JSON.parse(button.dataset.positive ?? false) && +button.dataset.value + val < 0) {
         return;
     }
 
