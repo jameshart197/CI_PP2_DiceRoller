@@ -67,7 +67,6 @@ actions.changeValueFromEvent = (e) => {
         case 2:
             actions.changeValue(-1, button);
             break;
-
         default:
             break;
     }
