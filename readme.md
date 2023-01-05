@@ -239,11 +239,7 @@ The website consists of a header, footer and a single page
 
 ### HTML Validation
 
-The W3C Markup Validation Service was used to validate the HTML of the website. 
-
-<details><summary>HTML Validation</summary>
-<img src="">
-</details>
+The W3C Markup Validation Service was used to validate the HTML of the website. Although this turns up quite a lot of errors they are all contained within the SVG code that is used to create certain images. This code is taken directly from an SVG production program and has no bearing on the code of the website. As such I have ignored these errors. 
 
 ### CSS Validation
 
