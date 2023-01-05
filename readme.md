@@ -1,4 +1,4 @@
-# Duck Pond DND Dice Roller <img src="assets/images/logo.png" style="width: 40px;height:40px;">
+# Duck Pond DND Dice Roller <img src="assets/images/no-text-logo.png" style="width: 40px;height:40px;">
 
 
 **Developer: James Hart**
@@ -132,12 +132,7 @@ The site is only a single page, intended to be added to a larger website in the 
 
 ### Wireframes
 
-<details><summary>Desktop and Laptop Screens</summary>
-
-</details>
-<details><summary>Mobile Screens</summary>
-
-</details>
+Unfortunately during the course of this project the Wireframe files were lost. Due to time constraints I have chosen not to recreate them after the project was finished just for the sake of including them in the Readme. The wireframes were made with Balsamiq and the key difference between them and the final project was in the mobile wireframes I initially did not have an "action panel" in the bottom of the screen because I had not considered that you cannot right click on mobile/tablet. When I realised this, I needed to make adjustments to the site, and created an action panel with modifying buttons. 
 
 ## Technologies Used
 
@@ -187,43 +182,56 @@ The website consists of a header, footer and a single page
 
 ### Dice Container
 
-- 
+- A clean white background with images of each dice. 
+- Has the highest number on the dice in view to tell you which dice is which
+- In mobile the dice move when selected so you know which die you are modifying
 
 ![Dice Container](docs/features/dice-container.png)
 
 ### Critical Hit Toggling Slide Buttons
 
-- 
+- Clear colouring tell you when these are active
+- Toggling one on toggles the other off
+- Clearly labelled in mobile and desktop
 
 ![Critical Slider Buttons](docs/features/crit-toggles.png)
 
 ### Modifier Section with +/- keys
 
-- 
+- Simplistic format is easy to read
+- Can be positive or negative
+- Carries over to the next roll
 
 ![Modifier Section](docs/features/modifiers.png)
 
 ### Roll Button
 
-- 
+- Clear purpose
+- Shows when hovered and clicked
 
 ![Roll Button](docs/features/roll-button.png)
 
 ### Animation Area
 
-- 
+- Fills with relevant number of dice rolled
+- Animates with number randomization
+- Ends on dice result
+- Has a scroll overflow
 
 ![Animation Area](docs/features/animation-area.png)
 
 ### Results Text Box
 
-- 
+- Clear and easy to read
+- Has a scroll overflow
+- Indicates which criticals are rolled and shows the mathematics involved in achieving final results
 
 ![Results Text Box](docs/features/results-box.png)
 
 ### Clear Button
 
-- 
+- Obvious, simple and out of the way
+- Clears whole text area
 
 ![Clear Button](docs/features/clear-button.png)
 
@@ -249,18 +257,19 @@ The W3C Jigsaw CSS Validation Service was used to validate the CSS of the websit
 
 ### Accessibility
 
-The WAVE WebAIM web accessibility evaluation tool was used to ensure the website met high accessibility standards. Each of the pages passes without errors.
+The WAVE WebAIM web accessibility evaluation tool was used to ensure the website met high accessibility standards. A warning is provided for an unlabelled form element, despite the presence of a label on the modifiers-desktop container. I was unable to rectify this error in the time available. There is also a contrast issue raised with the Roll button and its relevant text but I felt that the purpose of the button was clear even if the text was not present and thus chose to maintain the style. 
 
-<details><summary>Wave Evaluation Summary for Index Page</summary>
-<img src="">
+<details><summary>Wave Evaluation Summary</summary>
+<img src="docs/validation/wave.png">
 </details>
 
 ### Performance
 
-Google Lighthouse in Google Chrome Developer Tools was used to test the performance of the website. 
+Google Lighthouse in Google Chrome Developer Tools was used to test the performance of the website. The site is a little below the expected standard on mobile due to the presence of many images, some of which are not optimized for mobile. I chose to keep the images as they are at the cost of a small performance hit on mobile. The same warning that was present on the WAVE test is present for the Lighthouse test and remains unresolved (unlabelled form element).
 
-<details><summary>Lighthouse Evaluation for Index Page</summary>
-<img src="">
+<details><summary>Lighthouse Evaluation</summary>
+<img src="docs/validation/desktop-lighthouse.png">
+<img src="docs/validation/mobile-lighthouse.png">
 </details>
 
 ### Performing tests on various devices
@@ -295,124 +304,133 @@ The website was tested on the following browsers:
 </details>
 
 
-2. As a first time user I want to be able to roll a single d20
+2. As a first time user, I want to be able to roll multiple of a single dice
 
-- Select the D20 with left click on the relevant dice
+- Select the dice with left click on the relevant dice
+- Repeat click until correct number of chosen dice is displayed
 - Click Roll Button
 - See Results
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory2.png">
 </details>
 
-3. As a first time user I want to be able to roll a single d20
+3. As a first time user, I want to be able to roll various different dice
 
-- Select the D20 with left click on the relevant dice
+- Select each chosen dice with left click on the relevant dice
 - Click Roll Button
 - See Results
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory3.png">
 </details>
 
-4. As a first time user I want to be able to roll a single d20
+4. As a first time user, I want to be able to roll a standard critical hit
 
-- Select the D20 with left click on the relevant dice
+- Select the dice with left click on the relevant dice
+- Toggle on the "Standard Critical Hit" button
 - Click Roll Button
+- An extra dice is rolled for each dice selected as per standard critical hit rules
 - See Results
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory4.png">
 </details>
 
-5. As a first time user I want to be able to roll a single d20
+5. As a first time user, I want to be able to roll a dangerous critical hit
 
-- Select the D20 with left click on the relevant dice
+- Select the dice with left click on the relevant dice
+- Toggle on the "Dangerous Critical Hit" button
 - Click Roll Button
 - See Results
+- The maximum possible of each dice chosen is added to the total and mentioned as "Dangerous Crits" within the results
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory5.png">
 </details>
 
-6. As a first time user I want to be able to roll a single d20
+6. As a first time user, I want to add a modifier and see that represented
 
-- Select the D20 with left click on the relevant dice
+- Select the chosen dice with left click on the relevant dice
+- Use the +/- keys to set the modifier
 - Click Roll Button
 - See Results
+- See the modifier added in the results
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory6.png">
 </details>
 
-7. As a first time user I want to be able to roll a single d20
+7. As a returning user, I want to find links to the social media of the Duck Pond
 
-- Select the D20 with left click on the relevant dice
-- Click Roll Button
-- See Results
+- See the images representing social media in the footer
+- These images display what they are on hover (using titles)
+- Click relevant social media link
+- It opens in a new tab
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory7.png">
 </details>
 
-8. As a first time user I want to be able to roll a single d20
+8. As a returning user, I want to see my past rolls this session
 
-- Select the D20 with left click on the relevant dice
-- Click Roll Button
-- See Results
+- Make rolls
+- See the past rolls and results in the results-box to the right
+- Overflow is displayed in scroll format
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory8.png">
 </details>
 
-9. As a first time user I want to be able to roll a single d20
+9. As a returning user, I want to purchase Duck Pond merchandise
 
-- Select the D20 with left click on the relevant dice
-- Click Roll Button
-- See Results
+- See "shopping cart" icon in footer
+- Displays "Merchandise" tag on hover
+- Clicking opens in a new tab
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory9.png">
 </details>
 
-10. As a first time user I want to be able to roll a single d20
+10. As a returning user, I want to use this on my mobile
 
-- Select the D20 with left click on the relevant dice
-- Click Roll Button
-- See Results
+- Site is navigable in mobile format
+- Interactive action panel available for ease of use
+- Simplistic design and navigation at bottom of page allows for speed of usage
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory10.png">
 </details>
 
-11. As a first time user I want to be able to roll a single d20
+11. As the site owner, I want the user to understand the site intuitively
 
-- Select the D20 with left click on the relevant dice
-- Click Roll Button
-- See Results
+- All interactive elements have pointer hovers
+- Purpose of each button is clear and obvious
+- Site gives feedback such as hover queues and counter markers
+- On/Off switches are clear to see and understand
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory11.png">
 </details>
 
-12. As a first time user I want to be able to roll a single d20
+12. As the site owner, I want the user to be able to see their dice results clearly
 
-- Select the D20 with left click on the relevant dice
-- Click Roll Button
-- See Results
+- Results box is clear and easy to read
+- Results of each roll are clearly explained
+- Results include the calculations used to achieve result
+- Dice in the animations area displays result on the rolled dice
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory12.png">
 </details>
 
-13. As a first time user I want to be able to roll a single d20
+13. As the site owner, I want the user to be able to maintain their modifier from roll to roll
 
-- Select the D20 with left click on the relevant dice
-- Click Roll Button
-- See Results
+- When a modifier is selected it stays until changed
+- This is displayed with the modifier showing in each roll in the results-box
 
 <details><summary>Screen Capture</summary>
-<img src="docs/userstories/userstory1.png">
+<img src="docs/userstories/userstory13.png">
 </details>
 
 ## Bugs
